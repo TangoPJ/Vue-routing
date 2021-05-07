@@ -44,6 +44,7 @@
 		</div>
 
 		<button type="submit" class="btn btn-primary" @click="addUser">Add</button>
+
 		<hr>
 
 		<h4>To delete a member</h4>
@@ -86,6 +87,15 @@
 
 			methods: {
 				addUser() {
+					for (let item of this.persons) {
+						if (item.first_name === this.newUser.first_name &&
+								item.last_name === this.newUser.last_name) {
+							alert(`Already exists`);
+							this.newUser.first_name = "";
+							this.newUser.last_name = "";
+							return;
+						}
+					}
 					this.persons.push(this.newUser);
 					this.newUser = {};
 				},
@@ -99,6 +109,8 @@
 					}
 
 					deleteUser = {};
+					this.deleteUser.first_name = "";
+					this.deleteUser.last_name = "";
 				}
 			},
 		};
